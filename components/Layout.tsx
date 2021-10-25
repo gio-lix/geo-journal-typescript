@@ -2,8 +2,8 @@ import React, {FC, useEffect, useRef, useState} from "react";
 import Head from 'next/head'
 import Header from "@/components/header/Header";
 import CommentBar from "@/components/commentBar/CommentBar";
-import {useWidth} from "../costumHook/useWidth";
 import SideBar from "@/components/sideMenu/SideBar";
+import {useWidth} from "@/customHook/useWidth";
 
 
 interface LayoutProps {
@@ -75,7 +75,7 @@ const Layout: FC<LayoutProps> = ({
             <div className='flex  transform translate-y-[65px]'>
                 {!hideMenu &&  <div  className={`${sidebarShow ? 'w-52 md:w-[270px]' : 'sm:w-0 md:w-20'} fixed sm:sticky Z-10 left-0 h-auto `}> </div>}
                 {/* children  */}
-                <div className='flex flex-grow  border bg-gray-200 ' style={{height: "200vh"}}>
+                <div className='flex flex-grow  border bg-indigo-100 justify-center ' style={{height: "200vh"}}>
                     {children}
                 </div>
 

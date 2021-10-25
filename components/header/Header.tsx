@@ -9,9 +9,9 @@ import {fadeInUp} from "../../animation";
 import {BiPencil} from "react-icons/bi";
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {AiOutlineSearch} from 'react-icons/ai'
-import {useWidth} from "../../costumHook/useWidth";
 import {useRouter} from "next/router";
 import WriteForm from "@/components/pages/writeFrom";
+import {useWidth} from "@/customHook/useWidth";
 
 
 
@@ -103,10 +103,10 @@ const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps
                 <p className='text-3xl'>G</p>
                 {/*input*/}
                 <div className='hidden sm:inline-flex flex items-center rounded sm:w-52 md:w-72 h-full '>
-                    <div className='w-9 h-10 flex items-center justify-center absolute bg-gray-200 rounded-bl-xl rounded-tl-xl '>
+                    <div className='w-9 h-10 flex items-center justify-center absolute    rounded-bl-xl rounded-tl-xl '>
                         <AiOutlineSearch  className='w-7 h-7 text-gray-400'/>
                     </div>
-                    <input type="text" className='w-full h-10 pl-10 border rounded outline-none bg-gray-200' />
+                    <input type="text" className='w-full h-10 pl-10 border rounded  outline-none bg-gray-200' />
                 </div>
                 {/*new post*/}
                 <button onClick={handlePost} className="w-10 lg:w-28 h-10 border rounded drop-shadow hover:shadow-md bg-white flex items-center justify-center rounded">
