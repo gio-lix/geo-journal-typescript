@@ -1,12 +1,10 @@
 import React, {FC} from 'react';
 import {AiOutlineFire} from 'react-icons/ai'
-import {HiOutlinePencil} from 'react-icons/hi'
-import Image from "next/image";
 import Link from 'next/link'
-import {FiClock} from 'react-icons/fi'
 import {AiOutlineMessage} from 'react-icons/ai'
 import {MdOutlineUnsubscribe} from 'react-icons/md'
 import {SiCodersrank} from 'react-icons/si'
+import {useRouter} from "next/router";
 
 interface SidebarProps {
     sidebarShow: boolean
@@ -20,76 +18,25 @@ const navbar = [
 ]
 
 const SideBar: FC<SidebarProps> = ({sidebarShow}) => {
+    const router = useRouter()
+
     return (
-        <div className=' w-full'>
-            {sidebarShow && (
-                <ul className='w-full h-full mt-4 pr-5 pl-2 '>
-                    {navbar.map(item => (
-                        <li key={item.path}>
-                            <Link href={item.path} >
-                                <div className='h-[44px] cursor-pointer hover:bg-white rounded-lg flex items-center px-2 space-x-3 my-3'>
-                                    <div className='text-2xl'>
-                                        {item.icon}
-                                    </div>
-                                    <div>
-                                        <p className='text-base font-poppins text-gray-600 tracking-wide'>{item.text}</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </li>
-
-                    ))}
-
-                    {/*<div*/}
-                    {/*    className='h-[44px] hover:bg-white cursor-pointer rounded-lg flex items-center px-2 space-x-3 my-3'>*/}
-                    {/*    <div>*/}
-                    {/*        <FiClock className='w-6 h-6 text-gray-600'/>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <p className='text-base font-poppins text-gray-600 tracking-wide'>All</p>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*<div*/}
-                    {/*    className='h-[44px] hover:bg-white cursor-pointer rounded-lg flex items-center px-2 space-x-3 my-3'>*/}
-                    {/*    <div>*/}
-                    {/*        <AiOutlineMessage className='w-6 h-6 text-gray-600'/>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <p className='text-base font-poppins text-gray-600 tracking-wide'>Messages</p>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*<div*/}
-                    {/*    className='h-[44px] hover:bg-white cursor-pointer rounded-lg flex items-center px-2 space-x-3 my-3'>*/}
-                    {/*    <div>*/}
-                    {/*        <SiCodersrank className='w-6 h-6 text-gray-600'/>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <p className='text-base font-poppins text-gray-600 tracking-wide'>Rating</p>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*<div*/}
-                    {/*    className='h-[44px] hover:bg-white cursor-pointer rounded-lg flex items-center px-2 space-x-3 my-3'>*/}
-                    {/*    <div>*/}
-                    {/*        <MdOutlineUnsubscribe className='w-6 h-6 text-gray-600'/>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <p className='text-base font-poppins text-gray-600 tracking-wide'>Subscribe</p>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*/!*author*!/*/}
-                    {/*<div*/}
-                    {/*    className='h-[44px] hover:bg-white cursor-pointer rounded-lg flex items-center px-2 space-x-3 my-3'>*/}
-                    {/*    <div>*/}
-                    {/*        <HiOutlinePencil className='w-6 h-6 text-yellow-600'/>*/}
-                    {/*    </div>*/}
-                    {/*    <div>*/}
-                    {/*        <p className='text-base font-poppins text-yellow-600 tracking-wide'>Subscribe</p>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                </ul>
-            )}
-        </div>
-    );
+        <>
+            <div className={`fixed  z-30 top-16 md:top-0 w-52 sm:w-60 ${sidebarShow ? 'left-0' : '-left-60 '}`}>
+                {navbar.map((item, i) => (
+                    <div className='ml-4' key={i}>
+                        <Link href={item.path}>
+                            <a>
+                                <button   className={`${router.asPath === item.path && 'bg-gray-50'} ' flex items-center rounded w-full h-9 mt-3  cursor-pointer '`}>
+                                    <p className='ml-2 opacity-80'>{item.text}</p>
+                                </button>
+                            </a>
+                        </Link>
+                    </div>
+                ))}
+            </div>
+        </>
+    )
 };
 
 export default SideBar;

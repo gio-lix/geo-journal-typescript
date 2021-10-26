@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from "@/components/Layout";
 
 const Rating = () => {
     return (
-        <div>
+        <Layout title='rating'>
 
-        </div>
+        </Layout>
     );
 };
 
