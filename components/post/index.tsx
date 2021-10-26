@@ -16,7 +16,10 @@ const Post: FC = () => {
                 </div>
             </div>
             <div className='border bg-white '>
-                    dsfdsfds  dfdsfds
+                    dsfdsfds  dfdsfds dsdfdsf
+                <div className='h-36 w-full bg-green-100'>
+
+                </div>
             </div>
             <div className='w-full h-[56px] bg-white rounded-b-xl'>
 

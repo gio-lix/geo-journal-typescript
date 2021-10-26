@@ -67,15 +67,23 @@ const Layout: FC<LayoutProps> = ({
 
             {!hideMenu && (
                 <div ref={sidebarRef}
-                     className={`fixed z-10 left-0  h-screen overflow-y-auto top-16 bg-indigo-100 ${sidebarShow ? 'w-52 md:w-[270px] ' : ' sm:w-0 md:w-20'} `}>
+                     className={`fixed md:hidden z-10 left-0  h-screen overflow-y-auto top-16 bg-indigo-100 ${sidebarShow ? 'w-52 ' : ' w-0'} `}>
                     <SideBar sidebarShow={sidebarShow}/>
                 </div>
             )}
-            {/*side bar */}
-            <div className='flex  transform translate-y-[65px]'>
-                {!hideMenu &&  <div  className={`${sidebarShow ? 'w-52 md:w-[270px]' : 'sm:w-0 md:w-20'} fixed sm:sticky Z-10 left-0 h-auto `}> </div>}
+            {/*side bar*/}
+            <div className='flex  transform translate-y-[65px] bg-indigo-100'>
+                {/*{!hideMenu &&  <div  className={`${sidebarShow ? 'w-52 md:w-[270px]' : 'sm:w-0 md:w-20'} fixed md:sticky Z-10 left-0 h-auto `}> </div>}*/}
+                <div className={`hidden md:inline-flex ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
+                    <div
+                        className={`  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-0 left-0 bg-indigo-100 `}>
+                        <div className={`w-full h-full  flex justify-center ${!sidebarShow && 'items-center'}`}>
+                            <SideBar sidebarShow={sidebarShow}/>
+                        </div>
+                    </div>
+                </div>
                 {/* children  */}
-                <div className='flex flex-grow  border bg-indigo-100 justify-center ' style={{height: "200vh"}}>
+                <div className=' flex flex-grow  border bg-indigo-100 justify-center px-2' style={{height: "200vh"}}>
                     {children}
                 </div>
 

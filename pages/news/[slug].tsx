@@ -1,11 +1,16 @@
 import React from 'react';
+import Layout from "@/components/Layout";
+import PostComments from "@/components/post/postComments";
+// @ts-ignore
+import data from '/data'
 
-const pageTitle = () => {
+const CommentOfPost = () => {
+    console.log(data)
     return (
-        <div>
-
-        </div>
+        <Layout title='News'>
+           <PostComments />
+        </Layout>
     );
 };
 
-export default pageTitle;
+export default CommentOfPost;
