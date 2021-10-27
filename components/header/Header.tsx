@@ -1,10 +1,10 @@
-import React, {FC,  useEffect, useRef, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import ApplyLink from "@/components/header/navigation/ApplyLink";
 import messageImage from 'public/message.svg'
 import ringImage from 'public/ring.svg'
 import userImage from 'public/user.svg'
 import userLogin from 'public/userLogin.png'
-import { motion } from "framer-motion"
+import {motion} from "framer-motion"
 import {fadeInUp} from "../../animation";
 import {BiPencil} from "react-icons/bi";
 import {GiHamburgerMenu} from 'react-icons/gi'
@@ -13,7 +13,6 @@ import {useRouter} from "next/router";
 import WriteForm from "@/components/pages/writeFrom";
 import {useWidth} from "@/customHook/useWidth";
 import LoginForm from "@/components/account/loginForm/LoginForm";
-
 
 
 interface HeaderProps {
@@ -25,7 +24,11 @@ interface HeaderProps {
 }
 
 
-const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps>(({ handleClick,setCommentBar, setSideBarShow},ref) => {
+const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>(({
+                                                                                      handleClick,
+                                                                                      setCommentBar,
+                                                                                      setSideBarShow
+                                                                                  }, ref) => {
 
     const router = useRouter()
     const {width} = useWidth()
@@ -34,20 +37,29 @@ const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps
     const messageRef = useRef<HTMLDivElement>(null)
     const userRef = useRef<HTMLDivElement>(null)
     const bodyHoverRef = useRef<HTMLDivElement>(null)
+    const searchRef = useRef<HTMLDivElement>(null)
 
     const [ring, setRing] = useState(false)
     const [message, setMessage] = useState(false)
     const [user, setUser] = useState(false)
     const [post, setPost] = useState(false)
     const [login, setLogin] = useState(false);
+    const [search, setSearch] = useState(false);
 
 
     const handleLogin = () => {
         setLogin(!login)
         setSideBarShow(false)
         setCommentBar(false)
+        setSearch(false)
     }
 
+    const handleSearch = () => {
+        setSearch(!search)
+        setSideBarShow(false)
+        setLogin(false)
+        setCommentBar(false)
+    }
 
     const handleUser = () => {
         setUser(!user)
@@ -66,7 +78,7 @@ const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps
     }
 
 
-    const handlePost = () =>  setPost(!post)
+    const handlePost = () => setPost(!post)
 
     useEffect(() => {
         window.addEventListener('click', clearHead)
@@ -100,39 +112,53 @@ const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps
         if (e.path.includes(bodyHoverRef.current)) setPost(false)
     }
 
+    useEffect(() => {
+        window.addEventListener('click', searchClear)
+        return () => window.removeEventListener('click', searchClear)
+    }, [post])
+    const searchClear = (e: any) => {
+        if (!e.path.includes(searchRef.current)) setSearch(false)
+    }
 
 
+    console.log(search)
 
     return (
         <div className='fixed z-20 w-full h-[64px] flex justify-between bg-red-100 px-5 '>
             {/*left side*/}
-            <div className='flex items-center space-x-3 font-bold'>
-                <button ref={ref}  onClick={handleClick} className='h-full flex items-center justify-center w-10 h-10 '>
-                    <GiHamburgerMenu  className='w-7 h-7 hover:text-gray-400'  />
+            <div className=' flex  items-center space-x-3 font-bold'>
+                <button ref={ref} onClick={handleClick} className='h-full flex items-center justify-center w-10 h-10 '>
+                    <GiHamburgerMenu className='w-7 h-7 hover:text-gray-400'/>
                 </button>
                 <p className='text-3xl'>G</p>
                 {/*input*/}
-                <div className='hidden sm:inline-flex flex items-center rounded sm:w-52 md:w-72 h-full '>
-                    <div className='w-9 h-10 flex items-center justify-center absolute    rounded-bl-xl rounded-tl-xl '>
-                        <AiOutlineSearch  className='w-7 h-7 text-gray-400'/>
+                <div className='flex items-center space-x-2'>
+                    <div className='hidden sm:inline-flex flex items-center rounded sm:w-52 md:w-72 h-full '>
+                        <div
+                            className='w-9 h-10 flex items-center justify-center absolute    rounded-bl-xl rounded-tl-xl '>
+                            <AiOutlineSearch className='w-7 h-7 text-gray-400'/>
+                        </div>
+                        <input type="text" className='w-full h-10 pl-10 border rounded  outline-none bg-gray-200'/>
                     </div>
-                    <input type="text" className='w-full h-10 pl-10 border rounded  outline-none bg-gray-200' />
+                    {/*new post*/}
+                    <button onClick={handlePost}
+                            className="hidden sm:inline-flex w-10 lg:w-28 h-10 border rounded drop-shadow hover:shadow-md bg-white flex items-center justify-center rounded">
+                        {width < 1024 ? <BiPencil className='w-7 h-7'/> : (
+                            <p className='font-semibold'>New Post</p>
+                        )}
+                    </button>
                 </div>
-                {/*new post*/}
-                <button onClick={handlePost} className="w-10 lg:w-28 h-10 border rounded drop-shadow hover:shadow-md bg-white flex items-center justify-center rounded">
-                    {width < 1024 ? <BiPencil className='w-7 h-7' /> : (
-                        <p className='font-semibold'>New Post</p>
-                    )}
-                </button>
                 {post && (
-                   <>
-                       {/*   hover layout    */}
+                    <>
+                        {/*   hover layout    */}
 
-                       <div ref={bodyHoverRef} className='fixed z-30 w-full h-screen top-0 -left-3 -right-2 bg-black opacity-80 '>  </div>
-                       <div className='  fixed z-40 w-full flex justify-center'>
-                           <WriteForm onClick={handlePost} />
-                       </div>
-                   </>
+                        <div ref={bodyHoverRef}
+                             className='fixed  z-30 w-full h-screen top-0 -left-3 -right-2 bg-black opacity-80 '> </div>
+
+                        <div className='  fixed z-40 w-full flex justify-center'>
+                            <WriteForm onClick={handlePost}/>
+                        </div>
+                    </>
                 )}
             </div>
 
@@ -140,12 +166,26 @@ const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps
             <nav className='flex items-center h-full   '>
                 <ul className='flex items-center justify-between h-full w-full  '>
                     {/* message logo */}
-                    <li >
-                        <div ref={messageRef} >
+                    <li>
+                        <div ref={searchRef}>
+                            <div onClick={handleSearch}
+                                 className='sm:hidden flex items-center mr-2 cursor-pointer'>
+                                <AiOutlineSearch className='w-8 h-7 '/>
+                            </div>
+                            {search && (
+                                <motion.div initial="initial" variants={fadeInUp} animate='animate'
+                                            className='sm:hidden absolute top-[65px] w-full  h-14 right-0 top-[60px] p-1 py-2  bg-red-100 shadow-2xl'>
+                                    <input type="text" className="w-full h-full px-3 outline-none " placeholder='search'/>
+                                </motion.div>
+                            )}
+                        </div>
+                    </li>
+                    <li>
+                        <div ref={messageRef}>
                             <ApplyLink onClick={handleClickMessage} img={messageImage} height={30} width={30} href='/'/>
                             {message && (
                                 <motion.div initial="initial" variants={fadeInUp} animate='animate'
-                                    className=' absolute top-[64px] w-full sm:w-72 h-48 right-0  sm:right-44 bg-white shadow-2xl'>
+                                            className=' absolute top-[64px] w-full sm:w-72 h-48 right-0  sm:right-44 bg-white shadow-2xl'>
                                 </motion.div>
                             )}
                         </div>
@@ -180,11 +220,11 @@ const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps
 
                     <ApplyLink onClick={() => console.log('item')} img={userLogin} height={50} width={60} href='/'/>
                     <li onClick={handleLogin} className='cursor-pointer'>login</li>
-                    {login && <LoginForm setLogin={setLogin} />}
+                    {login && <LoginForm setLogin={setLogin}/>}
                 </ul>
             </nav>
         </div>
     );
 });
 
-export default Header ;
+export default Header;
