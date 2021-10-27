@@ -55,7 +55,7 @@ export default function Login() {
                 <div className=' flex-1  h-full px-2'>
                     {!email ? (
                         <>
-                            <h1>Login</h1>
+                            <h1 className='p-3 '>Login</h1>
                             <div className='cursor-pointer w-full h-10 mt-28 relative flex justify-center items-center rounded border-2  border-gray-500'>
                                 <p className='absolute left-2 flex items-center'>
                                     <Image src='/google.svg' width={20} height={20} alt='google' />
@@ -82,17 +82,17 @@ export default function Login() {
                             </div>
                         </>
                     ) : (
-                        <div>
+                        <div className='h-full  '>
                             {!register ? (
-                                <>
+                                <div className=' flex flex-col  justify-evenly items-center  h-full'>
 
                                     <button onClick={() => setEmail(false)}>
-                                        <div className='flex items-center '>
+                                        <div className='flex items-center'>
                                             <Image src='/up.svg' width={30} height={30} alt='back' className='transform -rotate-90'/>
                                             <p  className='mr-3'>Sign up</p>
                                         </div>
                                     </button>
-                                    <div className='mt-20 w-full '>
+                                    <div className='mt-20 w-full  flex flex-col items-center'>
                                         <p className='font-semibold'>Login through email</p>
 
                                         <p>or <span onClick={handleRegister} className='cursor-pointer ml-2 text-green-400'>Registration</span></p>
@@ -120,7 +120,7 @@ export default function Login() {
                                     {/*        <button className='text-gray-500 hover:text-red-600'>forget password ?</button>*/}
                                     {/*    </div>*/}
                                     {/*</form>*/}
-                                </>
+                                </div>
                             ) : (
                                 <Register setRegister={setRegister}  setEmail={setEmail}/>
                             )}

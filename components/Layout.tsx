@@ -4,9 +4,7 @@ import Header from "@/components/header/Header";
 import CommentBar from "@/components/commentBar/CommentBar";
 import SideBar from "@/components/sideMenu/SideBar";
 import {useWidth} from "@/customHook/useWidth";
-import {AiOutlineFire, AiOutlineMessage} from "react-icons/ai";
-import {SiCodersrank} from "react-icons/si";
-import {MdOutlineUnsubscribe} from "react-icons/md";
+import {GiHamburgerMenu} from 'react-icons/gi'
 import {useRouter} from "next/router";
 
 
@@ -34,8 +32,6 @@ const Layout: FC<LayoutProps> = ({
     const [commentBar, setCommentBar] = useState(false)
 
 
-
-
     const handleClick = () => {
         if (width < 1000 && commentBar) {
             setCommentBar(false)
@@ -56,16 +52,13 @@ const Layout: FC<LayoutProps> = ({
         }
     }, [width])
 
-    // useEffect(() => {
-    //     window.addEventListener('click', handleCheckMessagePath)
-    //     return () => window.removeEventListener('click', handleCheckMessagePath)
-    // }, [sidebarShow])
-    // const handleCheckMessagePath = (e: any) => {
-    //     if (!e.path.includes(sidebarRef.current) && !e.path.includes(buttonRef.current)) setSideBarShow(false)
-    // }
-
-
-
+    useEffect(() => {
+        window.addEventListener('click', handleCheckMessagePath)
+        return () => window.removeEventListener('click', handleCheckMessagePath)
+    }, [sidebarShow])
+    const handleCheckMessagePath = (e: any) => {
+        if (!e.path.includes(sidebarRef.current) && !e.path.includes(buttonRef.current)) setSideBarShow(false)
+    }
 
 
     return (
@@ -84,30 +77,39 @@ const Layout: FC<LayoutProps> = ({
 
 
             {sidebarShow && (
-                <div  className='fixed z-30 w-60 bg-indigo-100 h-screen top-16 left-0  md:hidden '>
-                    <SideBar sidebarShow={sidebarShow} />
-                </div>
+                <>
+                    <div className='fixed z-20 top-0 w-full h-screen bg-gray-600 opacity-60'> </div>
+                    <div ref={sidebarRef} className='fixed z-30 w-60 bg-indigo-100 h-screen top-0 left-0  md:hidden '>
+                        <div className='w-full h-[64px] border flex items-center pl-5'>
+                            <button onClick={handleClick}
+                                    className='h-full flex items-center justify-center w-10 h-10 '>
+                                <GiHamburgerMenu className='w-7 h-7 hover:text-gray-400'/>
+                            </button>
+                        </div>
+                        <SideBar sidebarShow={sidebarShow}/>
+                    </div>
+                </>
+
             )}
 
             <div className='flex pr-4 md:pr-0 bg-indigo-100'>
                 {/*menu side bar*/}
-                <div className={`hidden md:inline-flex  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
-                    <div className={`  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-20 left-0  `}>
+                <div ref={sidebarRef}
+                     className={`hidden md:inline-flex  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
+                    <div
+                        className={`  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-20 left-0  `}>
                         <div className={`w-full h-full   flex justify-center ${!sidebarShow && 'items-center'}`}>
-                            <SideBar sidebarShow={sidebarShow} />
+                            <SideBar sidebarShow={sidebarShow}/>
                         </div>
                     </div>
                 </div>
-                {/*<div className={`${sidebarShow ? 'w-64 drop-shadow-11xl md:drop-shadow-none' : 'w-4 sm:8 md:w-40'}  md:sticky z-30 top-16   h-[540px] overflow-y-auto scrollbar-hide `}>*/}
-                {/*    /!*<SideBar sidebarShow={sidebarShow} />*!/*/}
-                {/*</div>*/}
-                {/*main content */}
-                <div  className=' flex-1 ml-4 flex  justify-center  md:ml-0 mt-16 h-[1000px]'>
+                <div className=' flex-1 ml-4 flex  justify-center  md:ml-0 mt-16 h-[1000px]'>
                     {children}
                 </div>
                 {/*comment bar*/}
                 <div className={`hidden md:inline-flex  ${commentBar ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
-                    <div className={`  ${commentBar ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-14 right-0  `}>
+                    <div
+                        className={`  ${commentBar ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-14 right-0  `}>
                         <div className={`w-full h-full  flex justify-center ${!commentBar && 'items-center'}`}>
                             <CommentBar handleCommentBar={handleCommentBar} commentBar={commentBar}/>
                         </div>
