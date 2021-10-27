@@ -130,7 +130,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                 <button ref={ref} onClick={handleClick} className='h-full flex items-center justify-center w-10 h-10 '>
                     <GiHamburgerMenu className='w-7 h-7 hover:text-gray-400'/>
                 </button>
-                <p className='text-3xl'>G</p>
+                <button onClick={() => router.push('/')} className='text-3xl font-bold hover:text-red-600'>G</button>
                 {/*input*/}
                 <div className='flex items-center space-x-2'>
                     <div className='hidden sm:inline-flex flex items-center rounded sm:w-52 md:w-72 h-full '>
@@ -151,7 +151,6 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                 {post && (
                     <>
                         {/*   hover layout    */}
-
                         <div ref={bodyHoverRef}
                              className='fixed  z-30 w-full h-screen top-0 -left-3 -right-2 bg-black opacity-80 '> </div>
 
@@ -175,7 +174,8 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                             {search && (
                                 <motion.div initial="initial" variants={fadeInUp} animate='animate'
                                             className='sm:hidden absolute top-[65px] w-full  h-14 right-0 top-[60px] p-1 py-2  bg-red-100 shadow-2xl'>
-                                    <input type="text" className="w-full h-full px-3 outline-none " placeholder='search'/>
+                                    <input type="text" className="w-full h-full px-3 outline-none "
+                                           placeholder='search'/>
                                 </motion.div>
                             )}
                         </div>

@@ -78,7 +78,7 @@ const Layout: FC<LayoutProps> = ({
 
             {sidebarShow && (
                 <>
-                    <div className='fixed z-20 top-0 w-full h-screen bg-gray-600 opacity-60'> </div>
+                    <div className='md:hidden fixed z-20 top-0 w-full h-screen bg-gray-600 opacity-60'> </div>
                     <div ref={sidebarRef} className='fixed z-30 w-60 bg-indigo-100 h-screen top-0 left-0  md:hidden '>
                         <div className='w-full h-[64px] border flex items-center pl-5'>
                             <button onClick={handleClick}
