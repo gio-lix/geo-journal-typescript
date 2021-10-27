@@ -137,7 +137,6 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
 
 
 
-    console.log(search)
 
     return (
         <div className='fixed z-20 w-full h-[64px] flex justify-between bg-red-100 px-5 '>
@@ -236,8 +235,9 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                     </li>
 
                     {/*logo*/}
-
-                    <ApplyLink onClick={() => console.log('item')} img={userLogin} height={50} width={60} href='/'/>
+                    <div className='hidden sm:inline-flex'>
+                        <ApplyLink onClick={() => console.log('item')} img={userLogin} height={50} width={60} href='/'/>
+                    </div>
                     <li onClick={handleLogin} className='cursor-pointer'>login</li>
                     {login && <LoginForm setLogin={setLogin}/>}
 
