@@ -12,17 +12,20 @@ import {AiOutlineSearch} from 'react-icons/ai'
 import {useRouter} from "next/router";
 import WriteForm from "@/components/pages/writeFrom";
 import {useWidth} from "@/customHook/useWidth";
+import LoginForm from "@/components/account/loginForm/LoginForm";
 
 
 
 interface HeaderProps {
     handleClick: () => void,
+    setSideBarShow: Function,
+    setCommentBar: Function,
     ref: any
 
 }
 
 
-const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps>(({ handleClick},ref) => {
+const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps>(({ handleClick,setCommentBar, setSideBarShow},ref) => {
 
     const router = useRouter()
     const {width} = useWidth()
@@ -32,11 +35,18 @@ const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps
     const userRef = useRef<HTMLDivElement>(null)
     const bodyHoverRef = useRef<HTMLDivElement>(null)
 
-    const [ring, setRing] = useState<boolean>(false)
-    const [message, setMessage] = useState<boolean>(false)
-    const [user, setUser] = useState<boolean>(false)
-    const [post, setPost] = useState<boolean>(false)
+    const [ring, setRing] = useState(false)
+    const [message, setMessage] = useState(false)
+    const [user, setUser] = useState(false)
+    const [post, setPost] = useState(false)
+    const [login, setLogin] = useState(false);
 
+
+    const handleLogin = () => {
+        setLogin(!login)
+        setSideBarShow(false)
+        setCommentBar(false)
+    }
 
 
     const handleUser = () => {
@@ -169,7 +179,8 @@ const Header: FC<HeaderProps> =  React.forwardRef<HTMLButtonElement, HeaderProps
                     </li>
 
                     <ApplyLink onClick={() => console.log('item')} img={userLogin} height={50} width={60} href='/'/>
-                    <li>login</li>
+                    <li onClick={handleLogin} className='cursor-pointer'>login</li>
+                    {login && <LoginForm setLogin={setLogin} />}
                 </ul>
             </nav>
         </div>
