@@ -108,7 +108,7 @@ const Layout: FC<LayoutProps> = ({
                         </div>
                     </div>
                 </div>
-                <div className=' flex-1 ml-4 flex  justify-center  md:ml-0 mt-16 h-[1000px]'>
+                <div className=' flex-1 ml-4 flex  justify-center  md:ml-0 mt-16 h-auto'>
                     {children}
                 </div>
                 {/*comment bar*/}
