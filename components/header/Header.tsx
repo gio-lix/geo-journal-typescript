@@ -8,11 +8,13 @@ import {motion} from "framer-motion"
 import {fadeInUp} from "../../animation";
 import {BiPencil} from "react-icons/bi";
 import {GiHamburgerMenu} from 'react-icons/gi'
-import {AiOutlineSearch} from 'react-icons/ai'
+import {AiOutlineDown, AiOutlineSearch, AiOutlineSetting} from 'react-icons/ai'
+
 import {useRouter} from "next/router";
 import WriteForm from "@/components/pages/writeFrom";
 import {useWidth} from "@/customHook/useWidth";
 import LoginForm from "@/components/account/loginForm/LoginForm";
+import InfoPopUp from "@/components/post/postDetails/InfoPopPu";
 
 
 interface HeaderProps {
@@ -38,6 +40,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
     const userRef = useRef<HTMLDivElement>(null)
     const bodyHoverRef = useRef<HTMLDivElement>(null)
     const searchRef = useRef<HTMLDivElement>(null)
+    const infoRef = useRef<HTMLDivElement>(null)
 
     const [ring, setRing] = useState(false)
     const [message, setMessage] = useState(false)
@@ -45,6 +48,8 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
     const [post, setPost] = useState(false)
     const [login, setLogin] = useState(false);
     const [search, setSearch] = useState(false);
+    const [info, setInfo] = useState(false);
+
 
 
     const handleLogin = () => {
@@ -52,6 +57,9 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
         setSideBarShow(false)
         setCommentBar(false)
         setSearch(false)
+    }
+    const handleInfo = () => {
+        setInfo(!info)
     }
 
     const handleSearch = () => {
@@ -119,6 +127,14 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
     const searchClear = (e: any) => {
         if (!e.path.includes(searchRef.current)) setSearch(false)
     }
+    useEffect(() => {
+        window.addEventListener('click', infoClear)
+        return () => window.removeEventListener('click', infoClear)
+    }, [info])
+    const infoClear = (e: any) => {
+        if (!e.path.includes(infoRef.current)) setInfo(false)
+    }
+
 
 
     console.log(search)
@@ -205,6 +221,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                         </div>
                     </li>
 
+
                     {/* user logo*/}
                     <li>
                         <div ref={userRef}>
@@ -218,9 +235,23 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                         </div>
                     </li>
 
+                    {/*logo*/}
+
                     <ApplyLink onClick={() => console.log('item')} img={userLogin} height={50} width={60} href='/'/>
                     <li onClick={handleLogin} className='cursor-pointer'>login</li>
                     {login && <LoginForm setLogin={setLogin}/>}
+
+                    <li>
+                        <div ref={infoRef} >
+                            <div  onClick={handleInfo} className='cursor-pointer  ml-4'>
+                                <AiOutlineDown className='w-[22px] h-[22px] text-gray-500 hover:text-black'/>
+                            </div>
+                            {info && (
+                                <InfoPopUp />
+                            )}
+                        </div>
+
+                    </li>
                 </ul>
             </nav>
         </div>

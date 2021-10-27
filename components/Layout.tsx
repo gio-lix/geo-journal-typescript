@@ -58,7 +58,7 @@ const Layout: FC<LayoutProps> = ({
         return () => window.removeEventListener('click', handleCheckMessagePath)
     }, [sidebarShow])
     const handleCheckMessagePath = (e: any) => {
-        if (!e.path.includes(sidebarRef.current) && !e.path.includes(buttonRef.current) && !e.path.includes(commentRef.current)) setSideBarShow(false)
+        if (e.path.includes(sidebarRef.current) && !e.path.includes(buttonRef.current)) setSideBarShow(false)
     }
 
     useEffect(() => {
@@ -82,7 +82,7 @@ const Layout: FC<LayoutProps> = ({
                         setCommentBar={setCommentBar}
                         ref={buttonRef}/>
             </div>
-            <div >
+            <div ref={sidebarRef}>
                 {sidebarShow && (
                     <>
                         <div className='md:hidden fixed z-20 top-0 w-full h-screen bg-gray-600 opacity-60'> </div>
@@ -100,7 +100,7 @@ const Layout: FC<LayoutProps> = ({
             </div>
             <div  className='flex pr-4 md:pr-0 bg-indigo-100'>
                 {/*menu side bar*/}
-                <div  ref={sidebarRef} className={`hidden md:inline-flex  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
+                <div   className={`hidden md:inline-flex  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
                     <div
                         className={`  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-20 left-0  `}>
                         <div className={`w-full h-full   flex justify-center ${!sidebarShow && 'items-center'}`}>

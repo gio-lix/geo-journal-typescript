@@ -28,7 +28,7 @@ const Post: FC = () => {
                     doloremque dolores minima minus omnis quaerat ratione!</p>
             </div>
             <div className='border bg-white '>
-                <div className='relative h-auto  w-full bg-green-100'>
+                <div className='relative h-auto  w-full'>
                     <Image src={mailbox} width={50} height={50} layout='responsive' alt='logo' className='absolute'/>
                 </div>
             </div>
