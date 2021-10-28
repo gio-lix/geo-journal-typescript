@@ -5,15 +5,16 @@ import {BiRepost} from 'react-icons/bi'
 import {BsSticky} from 'react-icons/bs'
 import {IoMdShare} from 'react-icons/io'
 import {AiOutlineDown} from 'react-icons/ai'
-import mailbox from '/public/mailbox.jpg'
-import post from '/public/post.jpg'
+
 import Image from 'next/image'
 
 interface IPost {
-
+    title: string,
+    image: any,
+    text: string,
 }
 
-const Post: FC = () => {
+const Post: FC<IPost> = ({image, text, title}) => {
     return (
         <div className='w-full max-w-3xl my-5 bg-white rounded-xl p-3'>
             <div className='w-full  h-20 bg-white rounded-t-xl'>
@@ -22,16 +23,17 @@ const Post: FC = () => {
                     <BsThreeDots className='w-6 h-6'/>
                 </div>
             </div>
+            {/*body*/}
             <div>
-                <p className='text-base font-poppins my-4 font-semibold'>Lorem ipsum dolor sit.</p>
-                <p className='my-4'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad architecto atque, beatae consequatur
-                    doloremque dolores minima minus omnis quaerat ratione!</p>
+                <p className='text-base font-poppins my-4 font-semibold'>{title}</p>
+                <p className='my-4'>{text}</p>
             </div>
             <div className='border bg-white '>
-                <div className='relative h-auto  w-full'>
-                    <Image src={mailbox} width={50} height={50} layout='responsive' alt='logo' className='absolute'/>
+                <div className='relative h-auto  w-auto'>
+                    <Image src={image} width={50} height={50} layout='responsive' alt='logo' className='absolute'/>
                 </div>
             </div>
+            {/*bottom*/}
             <div className='flex items-center justify-between w-full h-[56px] bg-white rounded-b-xl px-6'>
                 <div className='flex items-center space-x-5'>
                     <div className='cursor-pointer'>
