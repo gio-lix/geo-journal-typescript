@@ -120,7 +120,7 @@ const Layout: FC<LayoutProps> = ({
                 {/*comment bar*/}
                 {!hideSideComments && (
                     <div ref={commentRef}
-                         className={`hidden md:inline-flex pt-20 ${commentBar ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
+                         className={`hidden md:inline-flex  pt-20 ${commentBar ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
                         <div
                             className={`  ${commentBar ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-20 right-0  `}>
                             <div className={`w-full h-full  flex justify-center ${!commentBar && 'items-center'}`}>
