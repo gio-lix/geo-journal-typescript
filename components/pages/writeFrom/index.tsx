@@ -40,7 +40,7 @@ const WriteForm: FC<IPost> = ({onClick}) => {
             <div className='flex justify-center '>
                 <input type="text" placeholder='Title' className='px-2 h-10 w-2/6 border-b-2 border-green-400 outline-none bg-gray-200 mt-4 '/>
             </div>
-            <div className='h-4/6  overflow-y-auto'>
+            <div className='h-4/6  overflow-y-auto scrollbar-hide'>
                 <Editor />
             </div>
             <div className='flex justify-center'>

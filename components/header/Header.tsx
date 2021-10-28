@@ -145,7 +145,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                 <button  onClick={handleClick} className='h-full flex items-center justify-center w-10 h-10 '>
                     <GiHamburgerMenu className='w-7 h-7 hover:text-gray-400'/>
                 </button>
-                <button onClick={() => router.push('/')} className='text-3xl font-bold hover:text-red-600'>G</button>
+                <button  className='text-3xl font-bold hover:text-red-600'>G</button>
                 {/*input*/}
                 <div className='flex items-center space-x-2'>
                     <div className='hidden sm:inline-flex flex items-center rounded sm:w-52 md:w-72 h-full '>
