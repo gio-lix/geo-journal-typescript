@@ -14,7 +14,7 @@ const navbar = [
     {text: 'Popular', icon: <AiOutlineFire/>, path: '/'},
     {text: 'messages', icon: <AiOutlineMessage />, path: '/messages'},
     {text: 'checkList', icon: <SiCodersrank/>, path: '/rating'},
-    {text: 'under', icon: <MdOutlineUnsubscribe/>, path: '/follows'}
+    {text: 'sticky', icon: <MdOutlineUnsubscribe/>, path: '/follows'}
 ]
 
 const SideBar: FC<SidebarProps> = ({sidebarShow}) => {

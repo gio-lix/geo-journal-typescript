@@ -13,12 +13,16 @@ interface LayoutProps {
     keywords?: string,
     description?: string,
     hideMenu?: boolean
+    hideSideComments?: boolean
+    hideSideMenu?: boolean
 
 }
 
 
 const Layout: FC<LayoutProps> = ({
                                      title,
+                                     hideSideComments,
+                                     hideSideMenu,
                                      hideMenu,
                                      description,
                                      keywords,
@@ -29,7 +33,7 @@ const Layout: FC<LayoutProps> = ({
     const sidebarRef = useRef<HTMLDivElement>(null)
     const buttonRef = useRef<HTMLButtonElement>(null)
     const commentRef = useRef<HTMLDivElement>(null)
-    const [sidebarShow, setSideBarShow] = useState(true)
+    const [sidebarShow, setSideBarShow] = useState(false)
     const [commentBar, setCommentBar] = useState(false)
 
 
@@ -66,7 +70,7 @@ const Layout: FC<LayoutProps> = ({
         return () => window.removeEventListener('click', handleCheckComponentPath)
     }, [commentBar, sidebarShow])
     const handleCheckComponentPath = (e: any) => {
-        if (!e.path.includes(commentRef.current) && !e.path.includes(sidebarRef.current) ) setCommentBar(false)
+        if (!e.path.includes(commentRef.current) && !e.path.includes(sidebarRef.current)) setCommentBar(false)
     }
 
     return (
@@ -85,8 +89,8 @@ const Layout: FC<LayoutProps> = ({
             <div ref={sidebarRef}>
                 {sidebarShow && (
                     <>
-                        <div className='md:hidden fixed z-20 top-0 w-full h-screen bg-gray-600 opacity-60'> </div>
-                        <div className='fixed z-30 w-60 bg-indigo-100 h-screen top-0 left-0  md:hidden '>
+                        <div className={` fixed z-20 top-0 w-full h-screen bg-gray-600 opacity-60 ${!hideSideMenu && 'md:hidden'}`}> </div>
+                        <div className={`fixed z-30 w-60 bg-indigo-100 h-screen top-0 left-0 ${!hideSideMenu && 'md:hidden'}`}>
                             <div className='w-full h-[64px] border flex items-center pl-5'>
                                 <button onClick={handleClick}
                                         className='h-full flex items-center justify-center w-10 h-10 '>
@@ -98,28 +102,33 @@ const Layout: FC<LayoutProps> = ({
                     </>
                 )}
             </div>
-            <div  className='flex pr-4 md:pr-0 bg-indigo-100'>
+            <div className='flex pr-4 md:pr-0 bg-indigo-100'>
                 {/*menu side bar*/}
-                <div   className={`hidden md:inline-flex  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
-                    <div
-                        className={`  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-20 left-0  `}>
-                        <div className={`w-full h-full   flex justify-center ${!sidebarShow && 'items-center'}`}>
-                            <SideBar sidebarShow={sidebarShow}/>
+                {!hideSideMenu && (
+                    <div className={`hidden md:inline-flex   ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
+                        <div
+                            className={`  ${sidebarShow ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-20 left-0  `}>
+                            <div className={`w-full h-full   flex justify-center ${!sidebarShow && 'items-center'}`}>
+                                <SideBar sidebarShow={sidebarShow}/>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
                 <div className=' flex-1 ml-4 flex  justify-center  md:ml-0 mt-16 h-auto'>
                     {children}
                 </div>
                 {/*comment bar*/}
-                <div ref={commentRef} className={`hidden md:inline-flex  ${commentBar ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
-                    <div
-                        className={`  ${commentBar ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-14 right-0  `}>
-                        <div className={`w-full h-full  flex justify-center ${!commentBar && 'items-center'}`}>
-                            <CommentBar  handleCommentBar={handleCommentBar} commentBar={commentBar}/>
+                {!hideSideComments && (
+                    <div ref={commentRef}
+                         className={`hidden md:inline-flex pt-20 ${commentBar ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} `}>
+                        <div
+                            className={`  ${commentBar ? 'w-52 md:w-[280px]' : 'w-12 md:w-20'} h-screen sticky top-20 right-0  `}>
+                            <div className={`w-full h-full  flex justify-center ${!commentBar && 'items-center'}`}>
+                                <CommentBar handleCommentBar={handleCommentBar} commentBar={commentBar}/>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
         </>
     )

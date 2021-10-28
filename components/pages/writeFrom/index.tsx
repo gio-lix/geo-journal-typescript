@@ -22,7 +22,7 @@ const WriteForm: FC<IPost> = ({onClick}) => {
 
     return (
         <motion.div initial="initial" variants={fadeInUp} animate='animate'
-                    className={` ${resizePost ? "h-full w-full top-0 left-0 " : "h-96 top-[65px] sm:w-96 md:w-[600px] lg:w-[800px]"}  
+                    className={` ${resizePost ? "h-full w-full top-0 left-0 z-75 " : "h-96 top-[65px] sm:w-96 md:w-[600px] lg:w-[800px]"}  
                     bg-white shadow-2xl fixed   p-4`}>
             <div className='flex justify-between items-center'>
                 <div>

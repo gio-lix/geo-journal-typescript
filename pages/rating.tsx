@@ -20,7 +20,6 @@ const Rating = () => {
     }, [state]);
 
 
-    console.log(active)
 
     return (
         <Layout title='rating'>

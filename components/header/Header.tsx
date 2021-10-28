@@ -142,7 +142,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
         <div className='fixed z-20 w-full h-[64px] flex justify-between bg-red-100 px-5 '>
             {/*left side*/}
             <div className=' flex  items-center space-x-3 font-bold'>
-                <button ref={ref} onClick={handleClick} className='h-full flex items-center justify-center w-10 h-10 '>
+                <button  onClick={handleClick} className='h-full flex items-center justify-center w-10 h-10 '>
                     <GiHamburgerMenu className='w-7 h-7 hover:text-gray-400'/>
                 </button>
                 <button onClick={() => router.push('/')} className='text-3xl font-bold hover:text-red-600'>G</button>
@@ -236,7 +236,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
 
                     {/*logo*/}
                     <div className='hidden sm:inline-flex'>
-                        <ApplyLink onClick={() => console.log('item')} img={userLogin} height={50} width={60} href='/'/>
+                        <ApplyLink onClick={() => router.push('profile')} img={userLogin} height={50} width={60} href='/profile'/>
                     </div>
                     <li onClick={handleLogin} className='cursor-pointer'>login</li>
                     {login && <LoginForm setLogin={setLogin}/>}
