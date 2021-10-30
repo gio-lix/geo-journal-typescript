@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {BsThreeDots} from 'react-icons/bs'
 import {FiMessageCircle} from 'react-icons/fi'
 import {BiRepost} from 'react-icons/bi'
@@ -14,13 +14,38 @@ interface IPost {
     text: string,
 }
 
+
 const Post: FC<IPost> = ({image, text, title}) => {
+    const dotsRef = useRef<HTMLDivElement>(null)
+    const [cartOpen, setCartOpen] = useState(false);
+
+    const handlerCartOpen = () => {
+        setCartOpen(!cartOpen)
+    }
+
+    useEffect(() => {
+        window.addEventListener('click', infoClear)
+        return () => window.removeEventListener('click', infoClear)
+    }, [cartOpen])
+    const infoClear = (e: any) => {
+        if (!e.path.includes(dotsRef.current)) setCartOpen(false)
+    }
+
+
     return (
-        <div className='w-full max-w-3xl my-5 bg-white rounded-xl p-3'>
-            <div className='w-full  h-20 bg-white rounded-t-xl'>
-                <div className='flex items-center justify-between px-3'>
+        <div className='w-full max-w-3xl my-5 bg-white rounded-xl p-3 group'>
+            <div className=' relative w-full  h-20 bg-white rounded-t-xl'>
+                <div ref={dotsRef} className='flex items-center justify-between px-3'>
                     <p className='text-lg font-bold '>G</p>
-                    <BsThreeDots className='w-6 h-6'/>
+                    <div onClick={handlerCartOpen} className='cursor-pointer '>
+                        <BsThreeDots className='w-6 h-6 text-gray-400 group-hover:text-black'/>
+                    </div>
+                    {cartOpen && (
+                        <div className=' absolute top-7 bg-white right-10 w-36 sm:w-44 h-auto rounded  border shadow-xl'>
+                            <p className=' p-1.5 sm:p-2 cursor-pointer font-poppins text-xs sm:text-sm border-b hover:bg-gray-100 text-gray-500 hover:text-black'>Complaint</p>
+                            <p className=' p-1.5 sm:p-2 cursor-pointer font-poppins text-xs sm:text-sm hover:bg-gray-100 text-gray-500 hover:text-black'>Close</p>
+                        </div>
+                    )}
                 </div>
             </div>
             {/*body*/}
