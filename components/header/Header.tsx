@@ -121,9 +121,9 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
         <div className='fixed z-20 w-full h-[64px] flex justify-between bg-red-100 px-5 '>
             {/*left side*/}
             <div className=' flex  items-center space-x-3 font-bold'>
-                <button  onClick={handleClick} className='h-full flex items-center justify-center w-10 h-10 '>
+                <div  onClick={handleClick} className='h-full flex items-center justify-center w-10 h-10 cursor-pointer'>
                     <GiHamburgerMenu className='w-7 h-7 text-gray-400 hover:text-black'/>
-                </button>
+                </div>
                 <button onClick={() => router.push('/')}  className='text-3xl font-bold hover:text-red-600'>G</button>
                 {/*input*/}
                 <div className='flex items-center space-x-2'>
@@ -168,7 +168,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                             {search && (
                                 <motion.div initial="initial" variants={fadeInUp} animate='animate'
                                             className='sm:hidden absolute top-[65px] w-full  h-14 right-0 top-[60px] p-1 py-2  bg-red-100 shadow-2xl'>
-                                    <input type="text" className="w-full h-full px-3 outline-none "
+                                    <input type="text" aria-label='search' className="w-full h-full px-3 outline-none "
                                            placeholder='search'/>
                                 </motion.div>
                             )}
@@ -217,11 +217,11 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                         </>
                     ) : (
                         <>
-                            <li onClick={handleLogin} className='flex space-x-2 items-center cursor-pointer text-gray-400 hover:text-green-400'>
+                            <li onClick={handleLogin} className='flex space-x-2 items-center cursor-pointer group '>
                                 <div>
                                     <RiLoginCircleFill className='w-[22px] h-[22px] text-green-200'/>
                                 </div>
-                                <p className=' font-poppins font-semibold '> login</p>
+                                <p className='text-gray-400 group-hover:text-green-400 font-poppins font-semibold '> login</p>
 
                             </li>
                             {login && <LoginForm setLogin={setLogin}/>}
