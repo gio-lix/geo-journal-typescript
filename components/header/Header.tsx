@@ -16,6 +16,10 @@ import {useWidth} from "@/customHook/useWidth";
 import LoginForm from "@/components/account/loginForm/LoginForm";
 import InfoPopUp from "@/components/post/postDetails/InfoPopPu";
 
+interface IUserLogin {
+    email: string,
+    password: string
+}
 
 interface HeaderProps {
     handleClick: () => void,
@@ -35,12 +39,16 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
     const router = useRouter()
     const {width} = useWidth()
 
+
     const ringRef = useRef<HTMLDivElement>(null)
     const messageRef = useRef<HTMLDivElement>(null)
     const userRef = useRef<HTMLDivElement>(null)
     const bodyHoverRef = useRef<HTMLDivElement>(null)
     const searchRef = useRef<HTMLDivElement>(null)
     const infoRef = useRef<HTMLDivElement>(null)
+
+
+    const [userLoginCheck, setUserLoginCheck] = useState<IUserLogin | null>({email: 'mollie@gmail.com' , password: 'wadwa123'});
 
     const [ring, setRing] = useState(false)
     const [message, setMessage] = useState(false)
@@ -52,41 +60,22 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
 
 
 
-    const handleLogin = () => {
-        setLogin(!login)
-        setSideBarShow(false)
-        setCommentBar(false)
-        setSearch(false)
-    }
-    const handleInfo = () => {
-        setInfo(!info)
-    }
-
-    const handleSearch = () => {
-        setSearch(!search)
-        setSideBarShow(false)
-        setLogin(false)
-        setCommentBar(false)
-    }
-
-    const handleUser = () => {
-        setUser(!user)
-        setMessage(false)
-        setRing(false)
-    }
-    const handleClickRing = () => {
-        setRing(!ring)
-        setMessage(false)
-        setUser(false)
-    }
-    const handleClickMessage = () => {
-        setMessage(!message)
-        setRing(false)
-        setUser(false)
-    }
-
-
+    const handleLogin = () => setLogin(!login)
+    const handleInfo = () => setInfo(!info)
+    const handleSearch = () => setSearch(!search)
+    const handleClickRing = () => setRing(!ring)
+    const handleClickMessage = () => setMessage(!message)
     const handlePost = () => setPost(!post)
+    // const handleUser = () => {
+    //     setUser(!user)
+    //     setMessage(false)
+    //     setRing(false)
+    // }
+
+
+
+
+
 
     useEffect(() => {
         window.addEventListener('click', clearHead)
@@ -197,7 +186,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                     </li>
                     <li>
                         <div ref={messageRef}>
-                            <ApplyLink onClick={handleClickMessage} img={messageImage} height={30} width={30} href='/'/>
+                            <ApplyLink onClick={handleClickMessage} img={messageImage} height={30} width={30} />
                             {message && (
                                 <motion.div initial="initial" variants={fadeInUp} animate='animate'
                                             className=' absolute top-[64px] w-full sm:w-72 h-48 right-0  sm:right-44 bg-white shadow-2xl'>
@@ -209,7 +198,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                     {/* ring logo */}
                     <li>
                         <div ref={ringRef}>
-                            <ApplyLink onClick={handleClickRing} img={ringImage} height={30} width={30} href='/'/>
+                            <ApplyLink onClick={handleClickRing} img={ringImage} height={30} width={30} />
                             {ring && (
                                 <motion.div
                                     initial="initial" variants={fadeInUp} animate='animate'
@@ -219,39 +208,46 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                             )}
                         </div>
                     </li>
+                    {userLoginCheck ? (
+                        <>
 
+                            {/* user logo*/}
+                            {/*<li>*/}
+                            {/*    <div ref={userRef}>*/}
+                            {/*        <ApplyLink onClick={handleUser} img={userImage} height={30} width={30} href='/'/>*/}
+                            {/*        {user && (*/}
+                            {/*            <motion.div*/}
+                            {/*                initial="initial" variants={fadeInUp} animate='animate'*/}
+                            {/*                className=' absolute top-[65px] w-full sm:w-96 h-52 right-0 sm:right-14 bg-white shadow-2xl'>*/}
+                            {/*            </motion.div>*/}
+                            {/*        )}*/}
+                            {/*    </div>*/}
+                            {/*</li>*/}
 
-                    {/* user logo*/}
-                    <li>
-                        <div ref={userRef}>
-                            <ApplyLink onClick={handleUser} img={userImage} height={30} width={30} href='/'/>
-                            {user && (
-                                <motion.div
-                                    initial="initial" variants={fadeInUp} animate='animate'
-                                    className=' absolute top-[65px] w-full sm:w-96 h-52 right-0 sm:right-14 bg-white shadow-2xl'>
-                                </motion.div>
-                            )}
-                        </div>
-                    </li>
-
-                    {/*logo*/}
-                    <div className='hidden sm:inline-flex'>
-                        <ApplyLink onClick={() => router.push('profile')} img={userLogin} height={50} width={60} href='/profile'/>
-                    </div>
-                    <li onClick={handleLogin} className='cursor-pointer'>login</li>
-                    {login && <LoginForm setLogin={setLogin}/>}
-
-                    <li>
-                        <div ref={infoRef} >
-                            <div  onClick={handleInfo} className='cursor-pointer  ml-4'>
-                                <AiOutlineDown className='w-[22px] h-[22px] text-gray-500 hover:text-black'/>
+                            {/*logo*/}
+                            <div className='hidden sm:inline-flex'>
+                                <ApplyLink onClick={() => router.push('profile')} img={userLogin} height={50} width={60} />
                             </div>
-                            {info && (
-                                <InfoPopUp />
-                            )}
-                        </div>
+                            <li>
+                                <div ref={infoRef} >
+                                    <div  onClick={handleInfo} className='cursor-pointer  '>
+                                        <AiOutlineDown className='w-[22px] h-[22px] text-gray-500 hover:text-black'/>
+                                    </div>
+                                    {info && (
+                                        <InfoPopUp />
+                                    )}
+                                </div>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li onClick={handleLogin} className='cursor-pointer font-poppins font-semibold text-gray-600 hover:text-green-400'>
+                                login
+                            </li>
+                            {login && <LoginForm setLogin={setLogin}/>}
 
-                    </li>
+                        </>
+                    )}
                 </ul>
             </nav>
         </div>

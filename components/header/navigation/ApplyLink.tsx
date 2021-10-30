@@ -8,7 +8,7 @@ export interface ImagesProps {
     width: number
 }
 
-interface ApplyLinkProps extends LinkProps {
+interface ApplyLinkProps {
     img: any,
     height: number,
     width: number,
@@ -20,17 +20,16 @@ const ApplyLink: FC<ApplyLinkProps> = ({
                                            height,
                                            width,
                                            onClick,
-                                           href,
                                        }) => {
 
 
 
     return (
-        <Link href={href} >
+        <button>
             <a onClick={onClick} className='flex items-center justify-center mr-2 md:mr-5 cursor-pointer'>
                 <ImageLink img={img} height={height} width={width} />
             </a>
-        </Link>
+        </button>
     );
 };
 
