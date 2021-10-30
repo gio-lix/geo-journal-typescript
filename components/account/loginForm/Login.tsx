@@ -10,14 +10,25 @@ import Register from "@/components/account/registrate/Register";
 // import Alert from '@material-ui/lab/Alert';
 
 
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import {LoginSchema} from "@/utils/schemas/loginValidation";
+
+interface IFormInputs {
+    email: string
+    password: number
+}
 
 
 export default function Login() {
     const [errorMessage, setErrorMessage] = useState('')
-    // const form = useForm({
-    //     mode: "onChange",
-    //     resolver: yupResolver(LoginFormSchema)
-    // })
+
+    const form = useForm({
+        mode: 'onChange',
+        resolver: yupResolver(LoginSchema)
+    })
+
+    const onSubmit = (data: IFormInputs) => console.log(data);
     // const onSubmit = async (loginData) => {
     //     try {
     //         const data = await USerApi.loginForm(loginData)
@@ -99,27 +110,29 @@ export default function Login() {
                                     </div>
                                     {/*alert*/}
 
-                                    {/*<form onSubmit={form.handleSubmit(onSubmit)}>*/}
-                                    {/*    <div  className='w-full  flex flex-col  mt-2 justify-between'>*/}
-                                    {/*        <p className='w-full mt-1 h-6 '>*/}
-                                    {/*            <p>{form.formState.errors.email?.message}</p>*/}
-                                    {/*        </p>*/}
-                                    {/*        <input {...form.register("email")} name='email' type="text" placeholder='email' className='rounded border p-1 border-gray-400 outline-none  w-full'/>*/}
-                                    {/*        <p className='w-full mt-1 h-6 '>*/}
-                                    {/*            {form.formState.errors.password?.message}*/}
-                                    {/*        </p>*/}
-                                    {/*        <input {...form.register("password")} name='password' type="text" placeholder='password' className='rounded  border p-1 border-gray-400 outline-none w-full'/>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div>*/}
-                                    {/*        {errorMessage && <Alert severity="error" className='mt-2'>{errorMessage}</Alert>}*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className='w-full h-10 mt-4 flex items-center justify-between'>*/}
-                                    {/*        <button disabled={!form.formState.isValid || form.formState.isSubmitting} type='submit' className='p-1 px-2 rounded bg-blue-300 hover:bg-blue-500'>*/}
-                                    {/*            <p className='font-bold text-white'>enter</p>*/}
-                                    {/*        </button>*/}
-                                    {/*        <button className='text-gray-500 hover:text-red-600'>forget password ?</button>*/}
-                                    {/*    </div>*/}
-                                    {/*</form>*/}
+                                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                                        <div  className='w-full  flex flex-col  mt-2 justify-between'>
+                                            <p className='w-full mt-1 h-6 '>
+                                                <p>{form.formState.errors.email?.message}</p>
+                                            </p>
+
+                                            {/*form*/}
+                                            <input {...form.register("email")} name='email' type="text" placeholder='email' className='rounded border p-1 border-gray-400 outline-none  w-full'/>
+                                            <p className='w-full mt-1 h-6 '>
+                                                {form.formState.errors.password?.message}
+                                            </p>
+                                            <input {...form.register("password")} name='password' type="text" placeholder='password' className='rounded  border p-1 border-gray-400 outline-none w-full'/>
+                                        </div>
+                                        {/*<div>*/}
+                                        {/*    {errorMessage && <Alert severity="error" className='mt-2'>{errorMessage}</Alert>}*/}
+                                        {/*</div>*/}
+                                        <div className='w-full h-10 mt-4 flex items-center justify-between'>
+                                            <button disabled={!form.formState.isValid || form.formState.isSubmitting} type='submit' className='p-1 px-2 rounded bg-blue-300 hover:bg-blue-500'>
+                                                <p className='font-bold text-white'>enter</p>
+                                            </button>
+                                            <button className='text-gray-500 hover:text-red-600'>forget password ?</button>
+                                        </div>
+                                    </form>
                                 </div>
                             ) : (
                                 <Register setRegister={setRegister}  setEmail={setEmail}/>

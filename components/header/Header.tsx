@@ -2,11 +2,11 @@ import React, {FC, useEffect, useRef, useState} from 'react';
 import ApplyLink from "@/components/header/navigation/ApplyLink";
 import messageImage from 'public/message.svg'
 import ringImage from 'public/ring.svg'
-import userImage from 'public/user.svg'
 import userLogin from 'public/userLogin.png'
 import {motion} from "framer-motion"
 import {fadeInUp} from "../../animation";
 import {BiPencil} from "react-icons/bi";
+import {RiLoginCircleFill} from "react-icons/ri";
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {AiOutlineDown, AiOutlineSearch, AiOutlineSetting} from 'react-icons/ai'
 
@@ -47,12 +47,12 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
     const searchRef = useRef<HTMLDivElement>(null)
     const infoRef = useRef<HTMLDivElement>(null)
 
+    let user = {email: 'mollie@gmail.com' , password: 'wadwa123'}
 
-    const [userLoginCheck, setUserLoginCheck] = useState<IUserLogin | null>({email: 'mollie@gmail.com' , password: 'wadwa123'});
+    const [userLoginCheck, setUserLoginCheck] = useState<IUserLogin | null>(null);
 
     const [ring, setRing] = useState(false)
     const [message, setMessage] = useState(false)
-    const [user, setUser] = useState(false)
     const [post, setPost] = useState(false)
     const [login, setLogin] = useState(false);
     const [search, setSearch] = useState(false);
@@ -66,11 +66,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
     const handleClickRing = () => setRing(!ring)
     const handleClickMessage = () => setMessage(!message)
     const handlePost = () => setPost(!post)
-    // const handleUser = () => {
-    //     setUser(!user)
-    //     setMessage(false)
-    //     setRing(false)
-    // }
+
 
 
 
@@ -93,13 +89,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
         if (!e.path.includes(messageRef.current)) setMessage(false)
     }
 
-    useEffect(() => {
-        window.addEventListener('click', clearUser)
-        return () => window.removeEventListener('click', clearUser)
-    }, [message])
-    const clearUser = (e: any) => {
-        if (!e.path.includes(userRef.current)) setUser(false)
-    }
+
 
     useEffect(() => {
         window.addEventListener('click', bodyClear)
@@ -112,7 +102,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
     useEffect(() => {
         window.addEventListener('click', searchClear)
         return () => window.removeEventListener('click', searchClear)
-    }, [post])
+    }, [search])
     const searchClear = (e: any) => {
         if (!e.path.includes(searchRef.current)) setSearch(false)
     }
@@ -167,10 +157,10 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
 
             {/*right side navigation*/}
             <nav className='flex items-center h-full   '>
-                <ul className='flex items-center justify-between h-full w-full  '>
+                <ul className='flex items-center   justify-between h-full w-full  '>
                     {/* message logo */}
                     <li>
-                        <div ref={searchRef}>
+                        <div ref={searchRef} >
                             <div onClick={handleSearch}
                                  className='sm:hidden flex items-center mr-2 cursor-pointer'>
                                 <AiOutlineSearch className='w-8 h-7 '/>
@@ -186,7 +176,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                     </li>
                     <li>
                         <div ref={messageRef}>
-                            <ApplyLink onClick={handleClickMessage} img={messageImage} height={30} width={30} />
+                            <ApplyLink onClick={handleClickMessage} img={messageImage} height={25} width={25} />
                             {message && (
                                 <motion.div initial="initial" variants={fadeInUp} animate='animate'
                                             className=' absolute top-[64px] w-full sm:w-72 h-48 right-0  sm:right-44 bg-white shadow-2xl'>
@@ -198,7 +188,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                     {/* ring logo */}
                     <li>
                         <div ref={ringRef}>
-                            <ApplyLink onClick={handleClickRing} img={ringImage} height={30} width={30} />
+                            <ApplyLink onClick={handleClickRing} img={ringImage} height={25} width={25} />
                             {ring && (
                                 <motion.div
                                     initial="initial" variants={fadeInUp} animate='animate'
@@ -210,26 +200,12 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                     </li>
                     {userLoginCheck ? (
                         <>
-
-                            {/* user logo*/}
-                            {/*<li>*/}
-                            {/*    <div ref={userRef}>*/}
-                            {/*        <ApplyLink onClick={handleUser} img={userImage} height={30} width={30} href='/'/>*/}
-                            {/*        {user && (*/}
-                            {/*            <motion.div*/}
-                            {/*                initial="initial" variants={fadeInUp} animate='animate'*/}
-                            {/*                className=' absolute top-[65px] w-full sm:w-96 h-52 right-0 sm:right-14 bg-white shadow-2xl'>*/}
-                            {/*            </motion.div>*/}
-                            {/*        )}*/}
-                            {/*    </div>*/}
-                            {/*</li>*/}
-
                             {/*logo*/}
                             <div className='hidden sm:inline-flex'>
-                                <ApplyLink onClick={() => router.push('profile')} img={userLogin} height={50} width={60} />
+                                <ApplyLink onClick={() => router.push('profile')} img={userLogin} height={40} width={40} />
                             </div>
                             <li>
-                                <div ref={infoRef} >
+                                <div ref={infoRef}  >
                                     <div  onClick={handleInfo} className='cursor-pointer  '>
                                         <AiOutlineDown className='w-[22px] h-[22px] text-gray-500 hover:text-black'/>
                                     </div>
@@ -241,11 +217,14 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                         </>
                     ) : (
                         <>
-                            <li onClick={handleLogin} className='cursor-pointer font-poppins font-semibold text-gray-600 hover:text-green-400'>
-                                login
+                            <li onClick={handleLogin} className='flex space-x-2 items-center cursor-pointer text-gray-600 hover:text-green-400'>
+                                <div>
+                                    <RiLoginCircleFill className='w-[22px] h-[22px]'/>
+                                </div>
+                                <p className=' font-poppins font-semibold '> login</p>
+
                             </li>
                             {login && <LoginForm setLogin={setLogin}/>}
-
                         </>
                     )}
                 </ul>
