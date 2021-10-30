@@ -26,7 +26,7 @@ const ApplyLink: FC<ApplyLinkProps> = ({
 
     return (
         <button>
-            <a onClick={onClick} className='flex items-center justify-center mr-2 md:mr-5 cursor-pointer'>
+            <a onClick={onClick} className='flex  items-center justify-center mr-2 md:mr-5 cursor-pointer'>
                 <ImageLink img={img} height={height} width={width} />
             </a>
         </button>

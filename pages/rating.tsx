@@ -47,7 +47,7 @@ const Rating = () => {
                                 <BsThreeDots className='w-6 h-6 text-gray-400 group-hover:text-black'/>
                             </div>
                             {closeCart && (
-                                <div className=' absolute  bg-white top-0 right-10 w-36 sm:w-44 h-auto rounded  border shadow-xl'>
+                                <div className=' absolute  bg-white top-5 right-10 w-36 sm:w-44 h-auto rounded  border shadow-xl'>
                                     <p className=' p-1.5 sm:p-2 cursor-pointer font-poppins text-xs sm:text-sm border-b hover:bg-gray-100 text-gray-500 hover:text-black'>Complaint</p>
                                     <p className=' p-1.5 sm:p-2 cursor-pointer font-poppins text-xs sm:text-sm hover:bg-gray-100 text-gray-500 hover:text-black'>Close</p>
                                 </div>

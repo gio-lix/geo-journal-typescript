@@ -2,17 +2,11 @@ import Image from "next/image";
 import {useState} from "react";
 import {useRouter} from "next/router";
 import Register from "@/components/account/registrate/Register";
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import { useForm } from "react-hook-form";
-// import {LoginFormSchema} from "@/utils/validation";
-// import {USerApi} from "@/utils/api";
-// import {setCookie} from "nookies";
-// import Alert from '@material-ui/lab/Alert';
 
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import {LoginSchema} from "@/utils/schemas/loginValidation";
+import {LoginSchema} from "@/utils/schemas/yupSchemas";
 
 interface IFormInputs {
     email: string
@@ -58,14 +52,15 @@ export default function Login() {
     return (
         <>
             <div className='flex  h-full'>
-                <div className=' hidden md:inline-flex w-72 h-full'>
+                <div className=' hidden md:inline-flex w-72 '>
                     <div className=' relative w-52 sm:w-72  h-full' >
                         <Image src='/userLogin.png' layout='fill' className='absolute' />
                     </div>
                 </div>
-                <div className=' flex-1  h-full px-2'>
+
+                <div className=' flex-1 h-full  px-1'>
                     {!email ? (
-                        <>
+                        <div>
                             <h1 className='p-3 '>Login</h1>
                             <div className='cursor-pointer w-full h-10 mt-28 relative flex justify-center items-center rounded border-2  border-gray-500'>
                                 <p className='absolute left-2 flex items-center'>
@@ -83,7 +78,8 @@ export default function Login() {
                                     <p className='ml-auto'>Facebook</p>
                                 </div>
                             </div>
-                            <div onClick={handleEmail} className='cursor-pointer w-full h-10 mt-6 relative flex justify-center items-center rounded border-2  border-gray-500'>
+                            <div onClick={handleEmail}
+                                 className='cursor-pointer w-full h-10 mt-6 relative flex justify-center items-center rounded border-2  border-gray-500'>
                                 <p className='absolute left-2 flex items-center'>
                                     <Image src='/mail.svg' width={20} height={20} alt='mail' />
                                 </p>
@@ -91,12 +87,11 @@ export default function Login() {
                                     <p className='ml-auto'>E-mail</p>
                                 </div>
                             </div>
-                        </>
+                        </div>
                     ) : (
-                        <div className='h-full  '>
+                        <div className='h-full w-full  '>
                             {!register ? (
-                                <div className=' flex flex-col  justify-evenly items-center  h-full'>
-
+                                <div className='  flex flex-col  justify-evenly items-center w-full h-full'>
                                     <button onClick={() => setEmail(false)}>
                                         <div className='flex items-center'>
                                             <Image src='/up.svg' width={30} height={30} alt='back' className='transform -rotate-90'/>
@@ -110,24 +105,29 @@ export default function Login() {
                                     </div>
                                     {/*alert*/}
 
-                                    <form onSubmit={form.handleSubmit(onSubmit)}>
-                                        <div  className='w-full  flex flex-col  mt-2 justify-between'>
-                                            <p className='w-full mt-1 h-6 '>
+                                    <form onSubmit={form.handleSubmit(onSubmit)} className='px-3 sm:px-5 md:px-0 w-full sm:w-4/5'>
+                                        <div  className='w-full   flex flex-col  mt-2 justify-between'>
+                                            <p className='w-full mt-1 h-6 text-xs text-gray-700'>
                                                 <p>{form.formState.errors.email?.message}</p>
                                             </p>
 
                                             {/*form*/}
-                                            <input {...form.register("email")} name='email' type="text" placeholder='email' className='rounded border p-1 border-gray-400 outline-none  w-full'/>
-                                            <p className='w-full mt-1 h-6 '>
+                                            <input {...form.register("email")} name='email' type="text" placeholder='email'
+                                                   className='rounded border p-1  border-gray-400 outline-none w-full'
+                                            />
+                                            <p className='w-full mt-1 h-6 text-xs text-gray-700'>
                                                 {form.formState.errors.password?.message}
                                             </p>
-                                            <input {...form.register("password")} name='password' type="text" placeholder='password' className='rounded  border p-1 border-gray-400 outline-none w-full'/>
+                                            <input {...form.register("password")} name='password' type="text"
+                                                   placeholder='password' className='rounded  border-gray-400 border p-1 outline-none w-full'
+                                            />
                                         </div>
                                         {/*<div>*/}
                                         {/*    {errorMessage && <Alert severity="error" className='mt-2'>{errorMessage}</Alert>}*/}
                                         {/*</div>*/}
                                         <div className='w-full h-10 mt-4 flex items-center justify-between'>
-                                            <button disabled={!form.formState.isValid || form.formState.isSubmitting} type='submit' className='p-1 px-2 rounded bg-blue-300 hover:bg-blue-500'>
+                                            <button disabled={!form.formState.isValid || form.formState.isSubmitting} type='submit'
+                                                    className='p-1 px-2 rounded bg-blue-300 hover:bg-blue-500'>
                                                 <p className='font-bold text-white'>enter</p>
                                             </button>
                                             <button className='text-gray-500 hover:text-red-600'>forget password ?</button>

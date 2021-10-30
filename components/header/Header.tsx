@@ -122,9 +122,9 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
             {/*left side*/}
             <div className=' flex  items-center space-x-3 font-bold'>
                 <button  onClick={handleClick} className='h-full flex items-center justify-center w-10 h-10 '>
-                    <GiHamburgerMenu className='w-7 h-7 hover:text-gray-400'/>
+                    <GiHamburgerMenu className='w-7 h-7 text-gray-400 hover:text-black'/>
                 </button>
-                <button  className='text-3xl font-bold hover:text-red-600'>G</button>
+                <button onClick={() => router.push('/')}  className='text-3xl font-bold hover:text-red-600'>G</button>
                 {/*input*/}
                 <div className='flex items-center space-x-2'>
                     <div className='hidden sm:inline-flex flex items-center rounded sm:w-52 md:w-72 h-full '>
@@ -136,9 +136,9 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                     </div>
                     {/*new post*/}
                     <button onClick={handlePost}
-                            className="hidden sm:inline-flex w-10 lg:w-28 h-10 border rounded drop-shadow hover:shadow-md bg-white flex items-center justify-center rounded">
-                        {width < 1024 ? <BiPencil className='w-7 h-7'/> : (
-                            <p className='font-semibold'>New Post</p>
+                            className="hidden group sm:inline-flex w-10 lg:w-28 h-10 border rounded drop-shadow hover:shadow-md bg-white flex items-center justify-center rounded">
+                        {width < 1024 ? <BiPencil className='w-7 h-7 text-green-300'/> : (
+                            <p className='font-semibold text-gray-500 group-hover:text-green-200'>New Post</p>
                         )}
                     </button>
                 </div>
@@ -163,7 +163,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                         <div ref={searchRef} >
                             <div onClick={handleSearch}
                                  className='sm:hidden flex items-center mr-2 cursor-pointer'>
-                                <AiOutlineSearch className='w-8 h-7 '/>
+                                <AiOutlineSearch className='w-8 h-7 text-gray-400'/>
                             </div>
                             {search && (
                                 <motion.div initial="initial" variants={fadeInUp} animate='animate'
@@ -207,7 +207,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                             <li>
                                 <div ref={infoRef}  >
                                     <div  onClick={handleInfo} className='cursor-pointer  '>
-                                        <AiOutlineDown className='w-[22px] h-[22px] text-gray-500 hover:text-black'/>
+                                        <AiOutlineDown className='w-[22px] h-[22px] text-gray-400 hover:text-black'/>
                                     </div>
                                     {info && (
                                         <InfoPopUp />
@@ -217,9 +217,9 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                         </>
                     ) : (
                         <>
-                            <li onClick={handleLogin} className='flex space-x-2 items-center cursor-pointer text-gray-600 hover:text-green-400'>
+                            <li onClick={handleLogin} className='flex space-x-2 items-center cursor-pointer text-gray-400 hover:text-green-400'>
                                 <div>
-                                    <RiLoginCircleFill className='w-[22px] h-[22px]'/>
+                                    <RiLoginCircleFill className='w-[22px] h-[22px] text-green-200'/>
                                 </div>
                                 <p className=' font-poppins font-semibold '> login</p>
 
