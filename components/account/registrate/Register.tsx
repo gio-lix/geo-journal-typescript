@@ -1,7 +1,12 @@
-import {FC, useState} from "react"
+import {FC, useEffect, useState} from "react"
 import { useForm,FormProvider , SubmitHandler } from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {RegisterFormSchema} from "@/utils/schemas/yupSchemas";
+import {UserApi} from "@/utils/api";
+import {createUserDto} from "@/utils/api/types";
+import {setCookie} from 'nookies'
+import {useAppDispatch} from "@/redux/hooks";
+import {setUserData} from "@/redux/slices/user";
 
 interface IRegisterForm {
     fullName: string,
@@ -15,13 +20,31 @@ interface IRegister {
     setEmail: Function
 }
 const Register: FC<IRegister> = ({setRegister,setEmail}) => {
+    const dispatch = useAppDispatch()
     const [errorMessage, setErrorMessage] = useState('')
     const form = useForm({
         mode: "onChange",
         resolver: yupResolver(RegisterFormSchema)
     })
-    const onSubmit = (data: IRegisterForm) => console.log(data);
+    const onSubmit = async (dto: createUserDto) => {
+            try {
+                const  data = await UserApi.register(dto)
 
+                setCookie(null, '_token', data.token, {
+                    maxAge: 30 * 24 * 60 * 60,
+                    path: '/',
+                })
+                setErrorMessage('')
+                dispatch(setUserData(data))
+            } catch (err: any) {
+                if (err.response) setErrorMessage(err.response.data.message)
+            }
+    }
+
+    useEffect(() => {
+        const time = setTimeout(() =>  setErrorMessage(''), 1400)
+        return () => clearTimeout(time)
+    }, [errorMessage]);
 
     const handleBack = () => {
         setRegister(false)
@@ -46,6 +69,9 @@ const Register: FC<IRegister> = ({setRegister,setEmail}) => {
           </div>
           <FormProvider {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className='px-3 sm:px-5 md:px-0 w-full h-full sm:w-4/5'>
+                  <div className='flex justify-center pb-7 '>
+                      {errorMessage && <p  className='mt-2 absolute text-base  text-red-700'>{errorMessage}</p>}
+                  </div>
                   <div className='w-full flex flex-col  mt-10 justify-between'>
                       <p className='w-full mb-2 h-5 '>
                           <p>{form.formState.errors.fullName?.message}</p>
@@ -60,9 +86,7 @@ const Register: FC<IRegister> = ({setRegister,setEmail}) => {
                       <p className='w-full mt-1 h-5 text-xs'>
                           <p>{form.formState.errors.password?.message}</p>
                       </p>
-                      {/*<div>*/}
-                      {/*    {errorMessage && <Alert severity="error" className='mt-2'>{errorMessage}</Alert>}*/}
-                      {/*</div>*/}
+
                       <input {...form.register("password")} type="password" placeholder='password'
                              className='rounded mt-3 border p-1 border-gray-400 outline-none  w-full'/>
                       <button disabled={!form.formState.isValid || form.formState.isSubmitting}

@@ -4,6 +4,7 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/customHook/*": ["customHook/*"],
+      "@/redux/*": ["redux/*"],
       "@/utils/*": ["utils/*"]
     },
     "target": "es5",

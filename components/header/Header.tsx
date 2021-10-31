@@ -16,11 +16,10 @@ import WriteForm from "@/components/pages/writeFrom";
 import {useWidth} from "@/customHook/useWidth";
 import LoginForm from "@/components/account/loginForm/LoginForm";
 import InfoPopUp from "@/components/post/postDetails/InfoPopPu";
+import {useAppSelector} from "@/redux/hooks";
+import {selectUserData} from "@/redux/slices/user";
 
-interface IUserLogin {
-    email: string,
-    password: string
-}
+
 
 interface HeaderProps {
     handleClick: () => void,
@@ -40,6 +39,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
     const router = useRouter()
     const {width} = useWidth()
 
+    const userData = useAppSelector(selectUserData)
 
     const ringRef = useRef<HTMLDivElement>(null)
     const messageRef = useRef<HTMLDivElement>(null)
@@ -48,9 +48,9 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
     const searchRef = useRef<HTMLDivElement>(null)
     const infoRef = useRef<HTMLDivElement>(null)
 
-    let user = {email: 'mollie@gmail.com', password: 'wadwa123'}
 
-    const [userLoginCheck, setUserLoginCheck] = useState<IUserLogin | null>({email: 'mollie@gmail.com', password: 'wadwa123'});
+
+
 
     const [ring, setRing] = useState(false)
     const [message, setMessage] = useState(false)
@@ -84,7 +84,6 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
         if (!e.path.includes(messageRef.current)) setMessage(false)
     }
 
-
     useEffect(() => {
         window.addEventListener('click', bodyClear)
         return () => window.removeEventListener('click', bodyClear)
@@ -100,6 +99,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
     const searchClear = (e: any) => {
         if (!e.path.includes(searchRef.current)) setSearch(false)
     }
+
     useEffect(() => {
         window.addEventListener('click', infoClear)
         return () => window.removeEventListener('click', infoClear)
@@ -207,7 +207,7 @@ const Header: FC<HeaderProps> = React.forwardRef<HTMLButtonElement, HeaderProps>
                             )}
                         </div>
                     </li>
-                    {userLoginCheck ? (
+                    {userData ? (
                         <>
                             {/*logo*/}
                             <div className='hidden sm:inline-flex'>
