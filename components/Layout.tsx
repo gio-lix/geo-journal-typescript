@@ -73,6 +73,7 @@ const Layout: FC<LayoutProps> = ({
         if (!e.path.includes(commentRef.current) && !e.path.includes(sidebarRef.current)) setCommentBar(false)
     }
 
+
     return (
         <>
             <Head>
