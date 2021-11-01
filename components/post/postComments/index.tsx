@@ -25,7 +25,7 @@ const PostComments: FC = () => {
     }
     return (
         <>
-            <div className='w-full max-w-3xl'>
+            <div className='w-full max-w-3xl mb-52'>
                 <div className='w-full  h-20 bg-white rounded-t-xl'>
                     <div className='flex items-center justify-between px-3'>
                         <p className='text-lg cursor-pointer font-bold '>G</p>

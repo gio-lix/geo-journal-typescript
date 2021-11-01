@@ -48,7 +48,7 @@ const Comments: FC<IComments> = ({user, text, createdAt}) => {
 
     return (
         <>
-            <div ref={replayRef} className='my-5  '>
+            <div ref={replayRef} className='my-5'>
 
                 <div className='flex items-center space-x-5'>
                     <Image src={user.avatarUrl} width={40} height={40} alt='avatar' className='rounded-full'/>
