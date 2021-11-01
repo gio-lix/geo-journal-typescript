@@ -4,8 +4,9 @@ import PostComments from "@/components/post/postComments";
 // @ts-ignore
 import data from '/data'
 
+
 const CommentOfPost = () => {
-    console.log(data)
+
     return (
         <Layout title='News'>
            <PostComments />
@@ -14,3 +15,4 @@ const CommentOfPost = () => {
 };
 
 export default CommentOfPost;
+

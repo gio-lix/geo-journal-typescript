@@ -7,18 +7,21 @@ import {IoMdShare} from 'react-icons/io'
 import {AiOutlineDown} from 'react-icons/ai'
 
 import Image from 'next/image'
+import {useRouter} from "next/router";
 
 interface IPost {
+    id: number,
     title: string,
     image: any,
     text: string,
 }
 
 
-const Post: FC<IPost> = ({image, text, title}) => {
+const Post: FC<IPost> = ({image, text, title,id}) => {
     const dotsRef = useRef<HTMLDivElement>(null)
     const [cartOpen, setCartOpen] = useState(false);
 
+    const router = useRouter()
     const handlerCartOpen = () => {
         setCartOpen(!cartOpen)
     }
@@ -29,6 +32,11 @@ const Post: FC<IPost> = ({image, text, title}) => {
     }, [cartOpen])
     const infoClear = (e: any) => {
         if (!e.path.includes(dotsRef.current)) setCartOpen(false)
+    }
+
+
+    const handlePush = (id: any) => {
+        router.push(`/news/${id}`)
     }
 
 
@@ -49,12 +57,12 @@ const Post: FC<IPost> = ({image, text, title}) => {
                 </div>
             </div>
             {/*body*/}
-            <div>
-                <p className='text-base font-poppins my-4 font-semibold'>{title}</p>
+            <div >
+                <p onClick={() => handlePush(id)} className='cursor-pointer text-base font-poppins my-4 font-semibold'>{title}</p>
                 <p className='my-4'>{text}</p>
             </div>
-            <div className='border bg-white '>
-                <div className='relative h-auto  w-auto'>
+            <div  onClick={() => handlePush(id)} className=' border bg-white '>
+                <div className='relative h-auto cursor-pointer w-auto'>
                     <Image src={image} width={50} height={50} layout='responsive' alt='logo' className='absolute'/>
                 </div>
             </div>

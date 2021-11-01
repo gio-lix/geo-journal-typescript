@@ -21,7 +21,7 @@ const SideComments: FC = () => {
                 <div>
                     {commentsData.map((obj: any) => (
                         <motion.div variants={fadeInUp} key={obj.id} className='my-4'>
-                            <div className='flex flex-col'>
+                            <div className='flex flex-col group'>
                                 <div onClick={() => router.push(`/profile/${obj.user.id}`)}
                                      className='flex space-x-2 cursor-pointer'>
                                     <Image src={obj.user.avatarUrl} width={25} height={25} className='rounded'
@@ -33,7 +33,7 @@ const SideComments: FC = () => {
                                 </div>
                                 <div>
                                     <p onClick={() => router.push(`/news/${obj.user.id}`)}
-                                       className='text-xs font-semibold text-gray-800 cursor-pointer'>{obj.post.title}</p>
+                                       className='text-xs font-semibold text-gray-800 cursor-pointer group-hover:underline '>{obj.post.title}</p>
                                 </div>
                             </div>
                         </motion.div>
