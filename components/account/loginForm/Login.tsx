@@ -31,7 +31,6 @@ export default function Login() {
     const onSubmit = async (dto: loginUserDto) => {
         try {
             const data = await UserApi.LoginApi(dto)
-            console.log(data)
             setCookie(null, '_token', data.token, {
                 maxAge: 30 * 24 * 60 * 60,
                 path: '/',

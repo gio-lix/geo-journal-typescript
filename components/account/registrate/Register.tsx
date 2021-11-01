@@ -26,10 +26,10 @@ const Register: FC<IRegister> = ({setRegister,setEmail}) => {
         mode: "onChange",
         resolver: yupResolver(RegisterFormSchema)
     })
+
     const onSubmit = async (dto: createUserDto) => {
             try {
                 const  data = await UserApi.register(dto)
-
                 setCookie(null, '_token', data.token, {
                     maxAge: 30 * 24 * 60 * 60,
                     path: '/',

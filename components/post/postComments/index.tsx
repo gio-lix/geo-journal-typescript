@@ -33,8 +33,7 @@ const PostComments: FC = () => {
                     </div>
                 </div>
                 <div className='border bg-white '>
-                    dsfdsfds dfdsfds dsdfdsf
-                    <div className='h-36 w-full bg-green-100'>
+                    <div className='h-36 w-full bg-gray-100'>
 
                     </div>
                 </div>
