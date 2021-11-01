@@ -20,7 +20,7 @@ const SideComments: FC = () => {
             <motion.div variants={stagger} initial="initial" animate='animate'>
                 <div>
                     {commentsData.map((obj: any) => (
-                        <motion.div variants={fadeInUp} key={obj.id} className='my-4'>
+                        <motion.div variants={fadeInUp} key={obj.id} className='my-4 '>
                             <div className='flex flex-col group'>
                                 <div onClick={() => router.push(`/profile/${obj.user.id}`)}
                                      className='flex space-x-2 cursor-pointer'>
@@ -41,9 +41,6 @@ const SideComments: FC = () => {
                 </div>
             </motion.div>
         </motion.div>
-
-        // </motion.div>
-        // </motion.div>
     )
 }
 export default SideComments

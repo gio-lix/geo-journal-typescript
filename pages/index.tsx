@@ -6,7 +6,7 @@ import AddPost from "@/components/post/AddPost";
 const Home: NextPage = () => {
     return (
         <Layout title='geoJournal '>
-            <div className='flex flex-col items-center  w-full '>
+            <div className='flex flex-col items-center  w-full h-auto '>
                 <AddPost />
             </div>
         </Layout>

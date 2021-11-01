@@ -2,14 +2,16 @@ import React from 'react';
 import Layout from "@/components/Layout";
 import PostComments from "@/components/post/postComments";
 // @ts-ignore
-import data from '/data'
+
 
 
 const CommentOfPost = () => {
 
     return (
         <Layout title='News'>
-           <PostComments />
+            <div>
+                <PostComments />
+            </div>
         </Layout>
     );
 };

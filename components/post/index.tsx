@@ -41,7 +41,7 @@ const Post: FC<IPost> = ({image, text, title,id}) => {
 
 
     return (
-        <div className='w-full max-w-3xl my-5 bg-white rounded-xl p-3 group'>
+        <div className='w-full h-auto max-w-3xl my-5 bg-white rounded-xl p-3 group'>
             <div className=' relative w-full  h-20 bg-white rounded-t-xl'>
                 <div ref={dotsRef} className='flex items-center justify-between px-3'>
                     <p className='text-lg font-bold '>G</p>

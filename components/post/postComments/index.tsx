@@ -29,19 +29,21 @@ const PostComments: FC = () => {
                 <div className='w-full  h-20 bg-white rounded-t-xl'>
                     <div className='flex items-center justify-between px-3'>
                         <p className='text-lg cursor-pointer font-bold '>G</p>
-                        <BsThreeDots className='w-6 h-6'/>
+                        <span>
+                            <BsThreeDots className='w-6 h-6'/>
+                        </span>
                     </div>
                 </div>
                 <div className='border bg-white '>
-                    <div className='h-36 w-full bg-gray-100'>
+                    <span className='h-36 w-full bg-gray-100'>
 
-                    </div>
+                    </span>
                 </div>
                 <div className='w-full h-[56px] bg-white rounded-b-xl'>
 
                 </div>
                 {/*comments*/}
-                <div className='bg-white rounded-2xl my-2 p-2 px-20'>
+                <div className='bg-white rounded-2xl my-2 p-2  px-6 sm:px-20'>
                     <div className='flex flex-col justify-between w-full h-20 bg-white border-b border-yellow-400'>
                         <p className='text-lg'>Comments</p>
                         <div className='flex space-x-4'>
@@ -54,8 +56,7 @@ const PostComments: FC = () => {
                                rows={!size ? 1.5 : 6}
                                className={`border border-gray-400 bp-10 resize-none p-1  px-2 outline-none bg-gray-100 w-full `}
                                onClick={() => setSize(true)}
-                     >
-                     </textarea>
+                    />
                         {size && <button  onClick={handlerAddComment} className='absolute right-3 bottom-5 px-5 bg-green-400 hover:bg-green-800 text-white font-bold'>Submit</button>}
                     </div>
                     <div className='mt-4'>

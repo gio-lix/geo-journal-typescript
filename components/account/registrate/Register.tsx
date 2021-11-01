@@ -74,24 +74,24 @@ const Register: FC<IRegister> = ({setRegister,setEmail}) => {
                   </div>
                   <div className='w-full flex flex-col  mt-10 justify-between'>
                       <p className='w-full mb-2 h-5 '>
-                          <p>{form.formState.errors.fullName?.message}</p>
+                          <span>{form.formState.errors.fullName?.message}</span>
                       </p>
                       <input {...form.register("fullName")} type="text" placeholder='full name'
                                  className='rounded border p-1 border-gray-400 outline-none  w-full'/>
                       <p className='w-full mt-1 h-5  text-xs'>
-                          <p>{form.formState.errors.email?.message}</p>
+                          <span>{form.formState.errors.email?.message}</span>
                       </p>
                       <input  {...form.register("email")} type="email" placeholder='email'
                               className='rounded border mt-3 p-1 border-gray-400 outline-none w-full'/>
                       <p className='w-full mt-1 h-5 text-xs'>
-                          <p>{form.formState.errors.password?.message}</p>
+                          <span>{form.formState.errors.password?.message}</span>
                       </p>
 
                       <input {...form.register("password")} type="password" placeholder='password'
                              className='rounded mt-3 border p-1 border-gray-400 outline-none  w-full'/>
                       <button disabled={!form.formState.isValid || form.formState.isSubmitting}
                               type='submit' className='p-1 mt-3 px-2 rounded bg-blue-300 hover:bg-blue-500'>
-                          <p className='font-bold text-white p-1'>Registration</p>
+                          <span className='font-bold text-white p-1'>Registration</span>
                       </button>
                   </div>
               </form>

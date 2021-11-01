@@ -70,26 +70,26 @@ export default function Login() {
                         <div>
                             <h1 className='p-3 '>Login</h1>
                             <div className='cursor-pointer w-full h-10 mt-28 relative flex justify-center items-center rounded border-2  border-gray-500'>
-                                <p className='absolute left-2 flex items-center'>
+                                <span className='absolute left-2 flex items-center'>
                                     <Image src='/google.svg' width={20} height={20} alt='google' />
-                                </p>
+                                </span>
                                 <div className=''>
                                     <p className='ml-auto'>Google</p>
                                 </div>
                             </div>
                             <div className='cursor-pointer w-full h-10 mt-6 relative flex justify-center items-center rounded border-2  border-gray-500'>
-                                <p className='absolute left-2 flex items-center'>
+                                <span className='absolute left-2 flex items-center'>
                                     <Image src='/faceBook.svg' width={20} height={20} alt='facebook' />
-                                </p>
+                                </span>
                                 <div className=''>
                                     <p className='ml-auto'>Facebook</p>
                                 </div>
                             </div>
                             <div onClick={handleEmail}
                                  className='cursor-pointer w-full h-10 mt-6 relative flex justify-center items-center rounded border-2  border-gray-500'>
-                                <p className='absolute left-2 flex items-center'>
+                                <span className='absolute left-2 flex items-center'>
                                     <Image src='/mail.svg' width={20} height={20} alt='mail' />
-                                </p>
+                                </span>
                                 <div className=''>
                                     <p className='ml-auto'>E-mail</p>
                                 </div>
