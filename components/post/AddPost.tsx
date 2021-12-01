@@ -27,9 +27,7 @@ import bridge from "../../public/bridge.webp";
 ]
 
 const AddPost: FC = () => {
-    console.log(dataText)
     return (
-
         <>
             {dataText.map(item => (
                 <Post key={item.id} id={item.id} title={item.title} image={item.image} text={item.text}/>

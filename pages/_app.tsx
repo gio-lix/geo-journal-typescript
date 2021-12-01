@@ -1,13 +1,33 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type {AppProps} from 'next/app'
 import {Provider} from "react-redux";
-import {store} from "@/redux/store";
+import {store, wrapper} from "@/redux/store";
+import {parseCookies} from "nookies";
+import {UserApi} from "@/utils/api";
+import {setUserData} from "@/redux/slices/user";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-      <Provider store={store}>
+function App({Component, pageProps}: AppProps) {
+    return (
+
         <Component {...pageProps} />
-      </Provider>
-  )
+    )
 }
-export default MyApp
+
+App.getInitialProps = wrapper.getInitialAppProps(store => async ({
+                                                                   ctx,
+                                                                   Component
+}) => {
+    try {
+        const {_token} = parseCookies(ctx)
+        const data = await UserApi.getMe(_token)
+        store.dispatch(setUserData(data))
+    } catch (err) {
+        console.log(err)
+    }
+    return {
+        pageProps: {
+        ...(Component.getInitialProps ? await Component.getInitialProps({...ctx, store}) : {})
+    }
+}
+})
+export default wrapper.withRedux(App)

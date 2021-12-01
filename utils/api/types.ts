@@ -7,7 +7,7 @@ export type createUserDto = {
     fullName: string,
 } & loginUserDto;
 
-export type responseUserDto = {
+export type ResponseUserDto = {
     createAt: string,
     email: string,
     fullName: string,
